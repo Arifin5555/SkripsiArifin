@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>Herbal With Us </title>
+	<style type="text/css">
+          div{
+            text-align: center;
+            padding: 7px;
+        }
+          .sidebar{
+            height: 250px;
+        }
+          .content{
+            height: 250px;
+		}
+		.responsive {
+		  width: auto;
+		  max-width: 130px;
+		  height: auto;
+		}
+    </style>
+</head>
+
+<body>
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbar">
+		<div class="navbar-nav"><a class="nav-item nav-link" id="Beranda" href="/">Beranda</a><a class="nav-item nav-link" id="Pendeteksian" href="/Pendeteksian">Pendeteksian</a><a class="nav-item nav-link" id="Bantuan" href="/Bantuan">Bantuan</a><a class="nav-item nav-link" id="TentangAplikasi" href="/TentangAplikasi">Tentang Aplikasi</a></div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<br></br>
+				<br></br>
+				<h1>Welcome to My Page</h1>
+				<br></br>
+		</div>
+		<div class="row">
+		<div class="col-md-3 col-sm-12 sidebar"><p style="text-align:center; font-weight:bold;"><h4>Profil Pembuat</h4></p><img class="responsive" src="/{{mySampleP}}" class="img-thumbnail" />
+		</div>
+		<div class="col-md-9 col-sm-12 content">
+		<p style="text-align:Justify;"><h4>Cara Pemakaian Modul Pendeteksian</h4></p>
+		<p style="text-align:Justify;">
+		1.Pengenalan gambar tanaman obat herbal hanya dapat mengenali 1 objek dalam setiap upload. Gambar yang diupload diupayakan terlihat jelas agar lebih mudah dikenali</br>.
+		<br>2.Pastikan gambar yang akan dikirimkan berupa objek tanaman jahe,kunyit,lengkuas dan temulawak diupayakan pengambilan gambar secara vertikal dengan latarbelakang putih atau tanpa ada objek lain</br>
+		<br>3.File extention gambar yang dapat diupload berupa file jpg,jpeg,gif, dan png dengan maksimal ukuran upload 16MB</br>
+		<br>4.Pengambilan gambar dapat lebih mudah kenali apabila objek telah terpotong sejajar melintang dengan pencahayaan cukup dan masih segar.</br>
+		<br>Aplikasi ini menggunakan penggabungan ciri warna Color Histogram, ciri bentuk Sobel, dan ciri tekstur Gray level co-occurrence matrix dengan metode klasifikasi support vector machine dengan kernel rbf</br>
+		<br>Aplikasi ini memiliki performa alogritma training 0.859% dan testing 0.799%</br>
+		<br>Pada data baru terdapat banyak faktor yang mempengaruhi kesalahan prediksi diantaranya:
+			Sudut pengambilan citra serta kamera, bentuk objek, pencahayaan, lingkungan sekitar objek, dll.
+		</br>
+		</p>
+		</div>
+		<div class="row">
+			<div class="col">
+				<form action="/Bantuan" method=post enctype="multipart/form-data">
+			</div>
+		</div> 
+	</div>
+
+		</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
