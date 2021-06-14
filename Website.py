@@ -131,7 +131,7 @@ def auto_remove(filename):
         mtime = datetime.datetime.fromtimestamp(fname.stat().st_mtime)
         if datetime_now + timedelta(minutes = 1) < mtime:
             os.remove(image_upload_dir + '/' + image)
-#ini imagenya ini dari user kan, untuk menyimpan imagenya itu saya yg test_image namanya, berpengaruh ngga yah ? , btw ini cara pemanggilannya mas ?
+
 			
 
 @app.route('/Pendeteksian/Uploads/<filename>')
