@@ -27,6 +27,8 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 import os
+import string
+import random
 from flask import render_template
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
@@ -67,7 +69,9 @@ app = Flask(__name__)
 
 def load_model_from_file():
 	#Set up the machine learning session
-	mySession = tf.Session()
+	S=10
+	ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))
+	mySession = ran
 	set_session(mySession)
 	myModel = load_model('modelklasifikasi.pkl')
 	myGraph = tf.get_default_graph()
@@ -75,7 +79,7 @@ def load_model_from_file():
 	
 #Try to allow only images
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 	
 	
 @app.route('/')
@@ -114,29 +118,31 @@ def upload_file():
 		#when the user uploads a file with good parameters
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			filedirectory = app.config['UPLOAD_FOLDER'] + "/" + str(app.config['SESSION']
+)
+			if not os.path.exists(filedirectory):
+				os.makedirs(filedirectory)
+			auto_remove(str(app.config['SESSION']))
+			file.save(os.path.join(filedirectory, filename))
 			return redirect(url_for('uploaded_file', filename=filename))
 			
 			
-def auto_remove(filename):
-    import pathlib
-    import os
-    from datetime import datetime, timedelta
-    image_upload_dir =  'static/uploads'
-    image_upload_list = os.listdir(image_upload_dir)
-    datetime_now = datetime.now()
+def auto_remove(app_session):
+	import pathlib
+	import os
+	from datetime import datetime, timedelta
+	image_upload_dir =  'static/uploads' +"/" +app_session
+	image_upload_list = os.listdir(image_upload_dir)
+	datetime_now = datetime.now()
 
-    for image in image_upload_list:
-        fname = pathlib.Path(image)
-        mtime = datetime.datetime.fromtimestamp(fname.stat().st_mtime)
-        if datetime_now + timedelta(minutes = 1) < mtime:
-            os.remove(image_upload_dir + '/' + image)
-
+	for image in image_upload_list:
+		os.remove(image_upload_dir + '/' + image)
 			
 
 @app.route('/Pendeteksian/Uploads/<filename>')
 def uploaded_file(filename):
-	test_image =(UPLOAD_FOLDER+"/"+filename)
+	test_image =(UPLOAD_FOLDER+"/" + str(app.config['SESSION']) + "/" +filename)
+	results = []
 	#test_image = image.img_to_array(test_image)
 	#test_image = np.expand_dims(test_image, axis=0)
 	pred_feature = feature_extraction(test_image)
@@ -148,7 +154,7 @@ def uploaded_file(filename):
 	with myGraph.as_default():
 		set_session(mySession)
 		result = myModel.predict(pred_df)
-		image_src = "/"+UPLOAD_FOLDER+"/"+filename
+		image_src = "/"+UPLOAD_FOLDER+"/"+ str(app.config['SESSION']) + "/"+filename
 		if result[0] == '0':
 			print('Jahe')
 			answer = "<div></div><div class='col-sm-4'><img width='150' height='150' src='"+image_src+"' class='img-thumbnail' /><h4>guess:"+J+" "+str(result[0])+"</h4><br></br><h4><i>Jahe bersifat anti-inflamasi dan anti-oksidatif yang bisa mengendalikan proses penuaan. Manfaat jahe lainnya, tanaman herbal ini juga memiliki potensi antimikroba yang dapat membantu dalam mengobati penyakit menular. Bahkan, manfaat jahe disebut-sebut dapat mencegah berbagai kanker</i></h4></div>"
@@ -180,9 +186,8 @@ def main():
 	app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB upload limit
 	app.run(debug=True, host="0.0.0.0", port=80)
 	
-	#Create a running list of result
-	
-results = []
+	#Create a running list of resul
 	
 #Launch Everything
 main()
+
